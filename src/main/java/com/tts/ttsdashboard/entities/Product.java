@@ -8,6 +8,17 @@ public class Product {
     @Id
     @Column(name = "id")
     private int id;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    @Column(name = "productname")
+    private String productName;
     @ManyToOne
     @JoinColumn(name = "category")
     private Category category;
@@ -24,7 +35,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(Category category, double fullPrice, double salePrice, boolean availability, Supplier supplier) {
+    public Product( String productName, Category category, double fullPrice, double salePrice, boolean availability, Supplier supplier) {
+        this.productName = productName;
         this.category = category;
         this.fullPrice = fullPrice;
         this.salePrice = salePrice;
