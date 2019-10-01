@@ -19,5 +19,8 @@ export class ProductsComponent implements OnInit {
     })
 
   }
-
+deleteProduct(id,index){
+    this.productsservice.delete(id).subscribe();
+    this.products.splice(index,1)
+}
 }
