@@ -1,5 +1,7 @@
 package com.tts.ttsdashboard.entities;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 
 @Entity
@@ -31,6 +33,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "supplier")
     private Supplier supplier;
+    @Formula(value = "(fullprice - saleprice) / fullprice")
+    private double discount;
 
     public Product() {
     }
@@ -90,5 +94,9 @@ public class Product {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public double getDiscount() {
+        return discount;
     }
 }
