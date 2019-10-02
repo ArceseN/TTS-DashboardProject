@@ -78,39 +78,40 @@
           <h4 class="modal-title">Add a Product</h4>
         </div>
         <div class="modal-body">
-          <form>
+          <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label for="productName">Product Name</label>
-              <input type="text" class="form-control" id="productName" placeholder="Product Name">
+              <input type="text" class="form-control" formControlName="productName" required>
             </div>
             <div class="form-group">
-              <label for="productCategory">Product Category</label>
-              <select class="form-control" id="productCategory">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+              <label for="category">Product Category</label>
+              <select class="form-control" formControlName="category" required>
+                <option *ngFor="let c of categories" [ngValue]="c._links.self.href">
+                  {{ c.categoryName }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="productSupplier">Product Supplier</label>
-              <input type="text" class="form-control" id="productSupplier" placeholder="Supplier">
+              <label for="supplier">Product Supplier</label>
+              <select class="form-control" formControlName="supplier" required>
+                <option *ngFor="let s of suppliers" [ngValue]="s._links.self.href">
+                  {{ s.supplierName }}</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="productPrice">Price</label>
-              <input type="number" id="productPrice">
+              <label for="productPrice">Full Price </label>
+              <input type="number" formControlName="fullPrice" required>
             </div>
             <div class="form-group">
               <label for="productSalePrice">Sale Price</label>
-              <input type="number" id="productSalePrice">
+              <input type="number" formControlName="salePrice" required>
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox"> Available
+                <input type="checkbox" formControlName="availability"> Available
               </label>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
-          </form>
-        </div>
+            <button type="submit" [disabled]="!productForm.valid">Submit</button>
+          </form> </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>

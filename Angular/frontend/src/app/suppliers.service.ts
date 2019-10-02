@@ -14,6 +14,6 @@ export class SuppliersService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.baseurl + '/suppliers');
+    return this.http.get(environment.baseurl + '/suppliers?size=1000');
   }
 }
