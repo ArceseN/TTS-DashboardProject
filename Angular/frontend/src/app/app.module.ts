@@ -4,12 +4,14 @@ import { HttpClientModule} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
+import { NgbdSortableHeader, ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { ReactiveFormsModule} from "@angular/forms";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgdbTableSortable } from './test/table-sortable';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ProductsComponent,
     CategoriesComponent,
     NavbarComponent,
-    SuppliersComponent
+    SuppliersComponent,
+    NgbdSortableHeader,
+    NgdbTableSortable
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule { }

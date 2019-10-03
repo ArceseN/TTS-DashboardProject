@@ -24,7 +24,7 @@
         <table class="table table-bordered table-striped">
           <thead>
           <tr>
-            <th>Product Name</th>
+            <th scope="col" sortable="name" (sort)="onSort($event)">Product Name</th>
             <th>Full Price</th>
             <th>Discount</th>
             <th>Category</th>
@@ -41,7 +41,7 @@
 
 
             <!--getting data from database tables-->
-          <td>{{product.productName}}</td>
+          <th scope="row">{{product.productName}}</th>
             <td>{{product.fullPrice | currency:'USD'}}</td>
 
             <td>{{product.discount | percent:'.0-1'}}</td>
