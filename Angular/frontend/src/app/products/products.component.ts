@@ -49,10 +49,21 @@ deleteProduct(id,index){
     category: [0],
     supplier: [0]
   });
+
+  //post
   onSubmit() {
     this.productsservice.create(JSON.stringify(this.productForm.value),
       { headers: new HttpHeaders({ 'Content-Type':  'application/hal+json;charset=UTF-8' })})
       .subscribe(res => console.log(res));
     location.reload();
+  }
+
+//put
+  editSubmit(id) {
+    this.productsservice.update(JSON.stringify(this.productForm.value),
+      { headers: new HttpHeaders({ 'Content-Type':  'application/hal+json;charset=UTF-8' })},
+    id)
+      .subscribe(res => console.log(res));
+    //location.reload();
   }
 }
