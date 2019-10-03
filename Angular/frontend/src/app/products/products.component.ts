@@ -6,6 +6,7 @@ import {SuppliersComponent} from "../suppliers/suppliers.component";
 import {CategoriesService} from "../categories/categories.service";
 import {SuppliersService} from "../suppliers.service";
 import {HttpHeaders} from "@angular/common/http";
+import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,8 @@ import {HttpHeaders} from "@angular/common/http";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+
+  page = 1;
 
   products: Array<any>;
   categories: Array<any>;
