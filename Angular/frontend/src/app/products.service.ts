@@ -28,6 +28,8 @@ update(newProduct, header, id): Observable<any>{
   return this.http.put(environment.baseurl + '/products/' + id, newProduct, header);
 }
 
+
+
 }
 
 

@@ -24,14 +24,15 @@
         <table class="table table-bordered table-striped">
           <thead>
           <tr>
-            <th scope="col" sortable="name" (sort)="onSort($event)">Product Name</th>
-            <th>Full Price</th>
-            <th>Discount</th>
+            <th>Product Name</th>
+            <th scope="col" sortable="fullPrice" (sort)="onSort($event)">Full Price</th>
+            <th scope="col" sortable="discount" (sort)="onSort($event)">Discount</th>
             <th>Category</th>
             <th>Supplier</th>
             <th>Availability</th>
-            <th>Edit or Delete</th>
 
+            <th scope="col" sortable="salePrice" (sort)="onSort($event)"> Sale Price</th>
+            <th>Edit or Delete</th>
           </tr>
           </thead>
           <tbody>
@@ -48,6 +49,8 @@
             <td>{{product._embedded.category.categoryName}}</td>
             <td>{{product._embedded.supplier.supplierName}}</td>
             <td>{{product.availability}}</td> <!--parse boolean to yes or no-->
+            <td>{{product.salePrice | currency:'USD'}}</td>
+
 
 
 

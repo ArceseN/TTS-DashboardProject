@@ -9,7 +9,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { ReactiveFormsModule} from "@angular/forms";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgdbTableSortable } from './test/table-sortable';
 
 

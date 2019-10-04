@@ -7,16 +7,21 @@ import {CategoriesService} from "../categories/categories.service";
 import {SuppliersService} from "../suppliers.service";
 import {HttpHeaders} from "@angular/common/http";
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
+import {Product} from "../product";
 
-
+//sortable table ordering
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
+
+//sorting column and direction
 export interface SortEvent {
   column: string;
   direction: SortDirection;
 }
+
+
 
 @Directive({
   selector: 'th[sortable]',
@@ -47,9 +52,13 @@ export class NgbdSortableHeader {
 })
 export class ProductsComponent implements OnInit {
 
+
+product: Product;
   page = 1;
 
-  products: Array<any>;
+  products: Product[];
+  dataproducts: Product[];
+
   categories: Array<any>;
   suppliers: Array<any>;
 
@@ -61,7 +70,8 @@ constructor(private productsservice:ProductsService,
   ngOnInit() {
     this.productsservice.getAll().subscribe(data => {
       this.products = data._embedded.products;
-      console.log(data._embedded.products);
+      this.dataproducts = this.products;
+      console.log(this.products);
     })
     this.categoriesservice.getAll().subscribe(data => {
       this.categories = data._embedded.categories;
@@ -104,10 +114,12 @@ constructor(private productsservice:ProductsService,
     //location.reload();
   }
 
-
+//sortable table
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   onSort({column, direction}: SortEvent) {
+
+
 
     // resetting other headers
     this.headers.forEach(header => {
@@ -116,15 +128,17 @@ constructor(private productsservice:ProductsService,
       }
     });
 
-    // sorting countries
+    // sorting products
     if (direction === '') {
-      this.products = this.products;
+      this.products = this.dataproducts;
     } else {
-      this.products = this.products.sort((a, b) => {
+      this.products = [...this.dataproducts].sort((a, b) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
       });
+      console.log(direction);
     }
   }
 
 }
+
