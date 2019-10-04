@@ -19,6 +19,17 @@
         <div class="alert alert-danger d-none" role="alert">...</div>
       </div>
 
+
+
+
+  <!--typeahead from ng bootstrap-->
+      <!--searching for products by category-->
+      <label for="typeahead-format">Search products by category:</label>
+      <input id="typeahead-format" type="text" (click)=searchByCat() class="frm-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+      <hr>
+
+
+
       <!-- Table -->
       <div class="table-responsive">
         <table class="table table-bordered table-striped">

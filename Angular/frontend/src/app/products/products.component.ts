@@ -8,9 +8,20 @@ import {SuppliersService} from "../suppliers.service";
 import {HttpHeaders} from "@angular/common/http";
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {Product} from "../product";
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
+import {Observable} from "rxjs";
+
+ const CATEGORIES = ['Baby', 'Beauty', 'Food', 'Garden','Health','Household','International','Pet','Toys','Wine & Beer'];
+
+
 
 //sortable table ordering
 export type SortDirection = 'asc' | 'desc' | '';
+
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -66,6 +77,7 @@ constructor(private productsservice:ProductsService,
               private fb: FormBuilder,
               private categoriesservice: CategoriesService,
               private suppliersservice: SuppliersService) { }
+
 
   ngOnInit() {
     this.productsservice.getAll().subscribe(data => {
@@ -140,5 +152,44 @@ constructor(private productsservice:ProductsService,
     }
   }
 
+
+
+//typeahead boilerplate
+  formatter = (result: string) => result.toUpperCase();
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term === '' ? []
+        : CATEGORIES.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+      );
+
+//category input
+    public model:any;
+
+    //function to search products by category
+   searchByCat() {
+
+     let prod;
+     this.productsservice.getAll().subscribe(data => {
+        prod = data._embedded.products;
+       let searchCat = this.model;
+       let productsInCat = [];
+       prod.forEach(function(product){
+           if (product._embedded.category.categoryName == searchCat) {
+             productsInCat.push(product)
+           }
+         }
+       )
+       //print array of only products in category to console
+       console.log(productsInCat)
+
+     })
+
+
+   }
+
 }
+
 
