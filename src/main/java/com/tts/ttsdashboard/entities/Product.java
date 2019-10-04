@@ -34,8 +34,7 @@ public class Product {
     @JoinColumn(name = "supplier")
     private Supplier supplier;
     @Formula(value = "(fullprice - saleprice) / fullprice")
-    private double discount;
-
+    private Double discount;
     public Product() {
     }
 
@@ -96,7 +95,8 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public double getDiscount() {
-        return discount;
+ //ternary to return zero if the discount is null; otherwise return the discount value
+    public Double getDiscount() {
+        return discount == null ? 0.0 : discount;
     }
 }
