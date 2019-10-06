@@ -6,30 +6,26 @@
 
       <h2 class="sub-header">Products</h2>
 
+      <!--typeahead from ng bootstrap-->
+      <!--searching for products by category-->
+      <label for="typeahead-format">Search products by category:</label>
+      <input id="typeahead-format" type="text" (click)=searchByCat() class="frm-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+      <hr>
+
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductForm">Add Product</button>
       <button type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
       </button>
 
       <!-- Alerts -->
+      <!--
       <div class="alert-group">
         <div class="alert alert-success " role="alert">...</div>
         <div class="alert alert-info d-none" role="alert">...</div>
         <div class="alert alert-warning d-none" role="alert">...</div>
         <div class="alert alert-danger d-none" role="alert">...</div>
       </div>
-
-
-
-
-  <!--typeahead from ng bootstrap-->
-      <!--searching for products by category-->
-      <label for="typeahead-format">Search products by category:</label>
-      <input id="typeahead-format" type="text" (click)=searchByCat() class="frm-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
-      <hr>
-
-
-
+-->
       <!-- Table -->
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -41,7 +37,6 @@
             <th>Category</th>
             <th>Supplier</th>
             <th>Availability</th>
-
             <th scope="col" sortable="salePrice" (sort)="onSort($event)"> Sale Price</th>
             <th>Edit or Delete</th>
           </tr>
@@ -50,7 +45,6 @@
 
 <!--          <tr  *ngFor="let product of products; let i= index">-->
           <tr  *ngFor="let product of products | slice: (page-1) * 20 : (page-1) * 20 + 20; let i= index">
-
 
             <!--getting data from database tables-->
           <th scope="row">{{product.productName}}</th>
@@ -61,11 +55,6 @@
             <td>{{product._embedded.supplier.supplierName}}</td>
             <td>{{product.availability}}</td> <!--parse boolean to yes or no-->
             <td>{{product.salePrice | currency:'USD'}}</td>
-
-
-
-
-
 
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
