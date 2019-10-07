@@ -20,22 +20,19 @@
         <div class="alert alert-danger d-none" role="alert">...</div>
       </div>
 -->
-      <!-- Table -->
 
+      <!-- Table -->
           <div class="table-responsive">
             <table class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>Id</th>
                 <th>Supplier Name</th>
-                <th>Edit Supplier Name</th>
-
+                <th>Edit or Delete</th>
               </tr>
               </thead>
               <tbody>
           <tr  *ngFor="let supplier of suppliers">
-
-
 
             <td>{{supplier.supplierId}}</td>
             <td>{{supplier.supplierName}}</td>

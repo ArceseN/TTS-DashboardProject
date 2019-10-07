@@ -20,5 +20,7 @@ export class CategoriesComponent implements OnInit {
     })
 
   }
-
-}
+  deleteProduct(id,index){
+    this.categoriesservice.delete(id).subscribe();
+    this.categories.splice(index,1)
+}}
